@@ -1,12 +1,21 @@
 const express=require("express")
 const connect=require("./configs/db")
-const userController=require("./controllers/user.ontroller")
+const userController=require("./controllers/user.controller")
 const{register,login}=require("./controllers/auth.controller")
-const app=express();
+ const app=express();
 app.use(express.json());
 app.use("/users", userController)
 app.post("/register",register)
 app.post("/login",login)
+
+// app.get("/",(req,res)=>{
+
+//     try {
+//         return res.send("connect")
+//     } catch (error) {
+//         return res.send({message:error.message})
+//     }
+// })
 app.listen(5000,async()=>{
 try{
 

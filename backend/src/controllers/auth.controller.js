@@ -8,14 +8,13 @@ const generateToken = (user) => {
 }
 const register = async (req, res) => {
     try{
+        console.log(req.body)
         let user = await User.findOne({email : req.body.email})
         if(user){
             return res.status(400).send({message : "Email already exists" })
         }
 
-        user = await User.create(req.body("name").isLength({ min: 4 }) .isEmpty()
-        .withMessage("First Name must be at least 4 characters"));
-        user = await User.create(req.body("email"));
+        user = await User.create(req.body);
 
         const token = generateToken(user)
         return res.status(200).send({user, token});
